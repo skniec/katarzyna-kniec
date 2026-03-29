@@ -392,6 +392,17 @@ a{color:inherit;text-decoration:none}
   display:flex;gap:2.5rem;flex-wrap:wrap;margin-top:2.5rem;
   padding-top:2rem;border-top:1px solid var(--border);
 }
+
+.about-social{
+  display:flex;gap:1.25rem;margin-top:2rem;flex-wrap:wrap;
+}
+.about-social-link{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--white-50);border:1px solid var(--border);
+  padding:.55rem 1.1rem;transition:color .3s,border-color .3s;
+}
+.about-social-link:hover{color:var(--gold);border-color:var(--gold)}
 .stat-n{
   font-family:var(--ff-bold);
   font-size:clamp(2.5rem,5vw,4rem);
@@ -491,8 +502,7 @@ a{color:inherit;text-decoration:none}
   gap:1px;background:var(--border);
   margin-bottom:clamp(3rem,6vw,5rem);
 }
-@media(min-width:640px){.pmu-grid{grid-template-columns:1fr 1fr}}
-@media(min-width:1024px){.pmu-grid{grid-template-columns:1fr 1fr 1fr}}
+@media(min-width:640px){.pmu-grid{grid-template-columns:1fr}}
 
 .pmu-card{
   background:var(--black-2);padding:2.5rem 2rem;
@@ -550,8 +560,8 @@ a{color:inherit;text-decoration:none}
 }
 .training-big{
   font-family:var(--ff-bold);
-  font-size:clamp(4rem,10vw,10rem);
-  line-height:.88;letter-spacing:.02em;color:var(--white);
+  font-size:clamp(2.5rem,6vw,6rem);
+  line-height:.95;letter-spacing:.02em;color:var(--white);
 }
 .training-big em{color:var(--gold);font-style:normal}
 .training-italic{
@@ -703,12 +713,15 @@ a{color:inherit;text-decoration:none}
   display:grid;grid-template-columns:1fr;
   gap:1px;background:var(--border);margin-bottom:2.5rem;
 }
-@media(min-width:640px){.lashes-grid{grid-template-columns:1fr 1fr 1fr}}
+@media(min-width:640px){.lashes-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1024px){.lashes-grid{grid-template-columns:1fr 1fr 1fr 1fr}}
 
 .lash-card{
   background:var(--black);padding:2rem 1.75rem;
   transition:background .3s;
+  display:flex;flex-direction:column;
 }
+.lash-card .btn{margin-top:auto}
 .lash-card:hover{background:var(--black-3)}
 .lash-card-title{
   font-family:var(--ff-bold);font-size:1.6rem;
@@ -753,7 +766,7 @@ a{color:inherit;text-decoration:none}
 .cinfo-ico{width:20px;height:20px;color:var(--gold);flex-shrink:0;margin-top:3px}
 .cinfo-label{font-size:.63rem;letter-spacing:.22em;text-transform:uppercase;color:var(--white-25);margin-bottom:.25rem}
 .cinfo-val{
-  font-family:var(--ff-display);font-size:1.2rem;color:var(--white);line-height:1.4;
+  font-size:1.1rem;color:var(--white);line-height:1.4;
 }
 .cinfo-val a{transition:color .3s}
 .cinfo-val a:hover{color:var(--gold)}
@@ -875,12 +888,63 @@ a{color:inherit;text-decoration:none}
 }
 
 /* ============================================================
+   HAMBURGER
+============================================================ */
+.nav-hamburger{
+  display:none;flex-direction:column;justify-content:center;gap:5px;
+  width:36px;height:36px;background:none;border:none;cursor:pointer;
+  padding:4px;z-index:300;
+}
+.nav-hamburger span{
+  display:block;width:100%;height:1.5px;background:var(--white);
+  transition:transform .3s,opacity .3s;transform-origin:center;
+}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+@media(max-width:799px){
+  .nav-hamburger{display:flex}
+
+  .nav-menu{
+    display:flex!important;flex-direction:column;align-items:center;gap:2rem;
+    position:fixed;inset:0;background:rgba(8,8,8,.97);z-index:250;
+    justify-content:center;
+    opacity:0;pointer-events:none;
+    transition:opacity .3s;
+  }
+  .nav-menu.open{opacity:1;pointer-events:all}
+  .nav-menu li a{font-size:1.4rem;letter-spacing:.15em}
+
+  .nav-cta{display:none}
+}
+
+/* ============================================================
    RESPONSIVE UTILS
 ============================================================ */
+/* Lashes gallery — responsive */
+@media(max-width:639px){
+  .lashes-gallery{grid-template-columns:1fr 1fr}
+}
+
+/* PMU gallery — 1 col on small phones */
 @media(max-width:480px){
+  .pmu-gallery{grid-template-columns:1fr}
   .hero-left{padding-bottom:3rem}
   .hero-ctas{flex-direction:column;align-items:flex-start}
-  .hero-name-big{font-size:clamp(4rem,16vw,8rem)}
+  .hero-name-big{font-size:clamp(3.2rem,14vw,5rem)}
+  .marquee-item{font-size:clamp(2.5rem,8vw,5rem)}
+  .lashes-big{font-size:clamp(3rem,10vw,6rem)}
+  .contact-big{font-size:clamp(3rem,10vw,6rem)}
+  .pmu-big{font-size:clamp(3.5rem,11vw,6rem)}
+  .about-big{font-size:clamp(3.5rem,11vw,8rem)}
+  .stat-n{font-size:clamp(2rem,8vw,3rem)}
+  .about-stats{gap:1.5rem}
+  .section-py{padding:clamp(3rem,8vw,5rem) 0}
+  .training-big{font-size:clamp(1.8rem,6vw,3rem)}
+  .tcard{padding:1.75rem 1.25rem}
+  .lash-card{padding:1.5rem 1.25rem}
+  .pmu-card{padding:1.75rem 1.25rem}
 }
 </style>
 </head>
@@ -907,13 +971,16 @@ a{color:inherit;text-decoration:none}
 
   <ul class="nav-menu">
     <li><a href="#szkolenia">Szkolenia</a></li>
-    <li><a href="#pmu">PMU</a></li>
     <li><a href="#rzesy">Rzęsy</a></li>
+    <li><a href="#pmu">PMU</a></li>
     <li><a href="#o-mnie">O mnie</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
   </ul>
 
-  <a href="tel:504998984" class="nav-cta">Umów wizytę</a>
+  <a href="https://booksy.com/pl-pl/127931_studio-lashes_brwi-i-rzesy_22068_bydgoszcz#ba_s=sh_1" target="_blank" rel="noopener noreferrer" class="nav-cta">Umów wizytę</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- ======================== HERO ======================== -->
@@ -927,19 +994,19 @@ a{color:inherit;text-decoration:none}
   <!-- Text content -->
   <div class="hero-left">
     <div class="hero-eyebrow">
-      <span class="label">Premium Studio · Bydgoszcz</span>
+      <span class="label">Studio · Bydgoszcz</span>
     </div>
     <div class="hero-title">Wzmocnij swoje</div>
     <div class="hero-name-big">NATURALNE<br>PIĘKNO</div>
     <div class="hero-divider"></div>
-    <p class="hero-sub">Makijaż Permanentny &nbsp;·&nbsp; Lashes &nbsp;·&nbsp; Szkolenia PMU</p>
+    <p class="hero-sub">Stylizacja rzęs i brwi &nbsp;·&nbsp; Szkolenia &nbsp;·&nbsp; Makijaż permanentny brwi</p>
     <div class="hero-ctas">
-      <a href="tel:504998984" class="btn btn-gold">Umów zabieg</a>
+      <a href="https://booksy.com/pl-pl/127931_studio-lashes_brwi-i-rzesy_22068_bydgoszcz#ba_s=sh_1" target="_blank" rel="noopener noreferrer" class="btn btn-gold">Umów na zabieg</a>
       <a href="#szkolenia" class="btn btn-outline">Zobacz szkolenia</a>
     </div>
   </div>
 
-  <div class="hero-signature">Katarzyna Knieć · PMU Artist</div>
+  <div class="hero-signature">Katarzyna Knieć · Instruktor</div>
 
 </section>
 
@@ -952,17 +1019,17 @@ a{color:inherit;text-decoration:none}
       </div>
       <span class="icon-label">Szkolenia</span>
     </a>
-    <a href="#pmu" class="icon-item">
-      <div class="icon-circle">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8 2 4 6 4 10c0 6 8 12 8 12s8-6 8-12c0-4-4-8-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
-      </div>
-      <span class="icon-label">Makijaż PMU</span>
-    </a>
     <a href="#rzesy" class="icon-item">
       <div class="icon-circle">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12c0 0 2-5 9-5s9 5 9 5-2 5-9 5-9-5-9-5z"/><circle cx="12" cy="12" r="2.5"/></svg>
       </div>
       <span class="icon-label">Rzęsy</span>
+    </a>
+    <a href="#pmu" class="icon-item">
+      <div class="icon-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8 2 4 6 4 10c0 6 8 12 8 12s8-6 8-12c0-4-4-8-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <span class="icon-label">Makijaż PMU</span>
     </a>
     <a href="#o-mnie" class="icon-item">
       <div class="icon-circle">
@@ -984,39 +1051,13 @@ a{color:inherit;text-decoration:none}
   <div class="container">
 
     <div class="training-hero-text reveal">
-      <div class="training-italic">Zostań certyfikowaną artystką</div>
-      <div class="training-big">SZKOLE<em>N</em>IA<br>&amp; KURSY PMU · RZĘSY</div>
+      <div class="training-big">SZKOLENIA<br>&amp; STYLIZACJA BRWI I RZĘS<br>&amp; MAKIJAŻ PERMANENTNY</div>
     </div>
 
     <div class="training-cards">
 
-      <!-- LIGHT VOLUME 2-3D -->
-      <div class="tcard tcard--featured reveal tilt-card">
-        <span class="tcard-level" style="border-color:var(--gold)">Zaawansowany · Rzęsy</span>
-        <h3 class="tcard-title" style="color:var(--gold)">LIGHT<br>VOLUME 2-3D</h3>
-        <p class="tcard-for">Dla osób, które ukończyły kurs podstawowy i opanowały technikę 1:1.</p>
-        <ul class="tcard-list">
-          <li>Obszerny skrypt szkoleniowy</li>
-          <li>Certyfikat ukończenia</li>
-          <li>Upominek</li>
-          <li>Niezbędne narzędzia do pracy</li>
-          <li>Obiad oraz słodki poczęstunek</li>
-          <li>Zniżki na produkty do stylizacji rzęs</li>
-        </ul>
-        <div class="tcard-meta">
-          <div class="tcard-meta-item"><strong>Czas trwania</strong><span>1 dzień</span></div>
-          <div class="tcard-meta-item"><strong>Tryb</strong><span>Indywidualny</span></div>
-        </div>
-        <div class="tcard-cert">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          Certyfikat ukończenia
-        </div>
-        <div class="tcard-price">[cena do uzupełnienia]</div>
-        <a href="tel:504998984" class="btn btn-gold btn-sm">Zapisz się</a>
-      </div>
-
       <!-- RZĘSY BASIC 1:1 -->
-      <div class="tcard reveal d1 tilt-card">
+      <div class="tcard reveal tilt-card">
         <span class="tcard-level">Podstawowy · Rzęsy</span>
         <h3 class="tcard-title">BASIC<br>1:1</h3>
         <p class="tcard-for">Dla osób, które chcą rozpocząć przygodę ze stylizacją rzęs i zbudować solidne fundamenty w tym zawodzie.</p>
@@ -1037,71 +1078,108 @@ a{color:inherit;text-decoration:none}
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           Certyfikat Artystki Rzęs
         </div>
-        <div class="tcard-price">[cena do uzupełnienia]</div>
-        <a href="tel:504998984" class="btn btn-outline btn-sm">Zapisz się</a>
+
+        <a href="https://booksy.com/pl-pl/127931_studio-lashes_brwi-i-rzesy_22068_bydgoszcz#ba_s=sh_1" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Zapisz się</a>
+      </div>
+
+      <!-- LIGHT VOLUME 2-3D -->
+      <div class="tcard tcard--featured reveal d1 tilt-card">
+        <span class="tcard-level" style="border-color:var(--gold)">Zaawansowany · Rzęsy</span>
+        <h3 class="tcard-title" style="color:var(--gold)">LIGHT<br>VOLUME 2-3D</h3>
+        <p class="tcard-for">Dla osób, które ukończyły kurs podstawowy i opanowały technikę 1:1.</p>
+        <ul class="tcard-list">
+          <li>Obszerny skrypt szkoleniowy</li>
+          <li>Certyfikat ukończenia</li>
+          <li>Upominek</li>
+          <li>Niezbędne narzędzia do pracy</li>
+          <li>Obiad oraz słodki poczęstunek</li>
+          <li>Zniżki na produkty do stylizacji rzęs</li>
+        </ul>
+        <div class="tcard-meta">
+          <div class="tcard-meta-item"><strong>Czas trwania</strong><span>1 dzień</span></div>
+          <div class="tcard-meta-item"><strong>Tryb</strong><span>Indywidualny</span></div>
+        </div>
+        <div class="tcard-cert">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Certyfikat ukończenia
+        </div>
+
+        <a href="https://booksy.com/pl-pl/127931_studio-lashes_brwi-i-rzesy_22068_bydgoszcz#ba_s=sh_1" target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-sm">Zapisz się</a>
       </div>
 
     </div>
 
-    <!-- Why -->
-    <span class="label reveal">Dlaczego warto szkolić się u Katarzyny</span>
-    <div class="why-grid">
-      <div class="why-item reveal">
-        <svg class="why-ico" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="20" cy="20" r="16"/><path d="M13 20l5 5 9-9"/></svg>
-        <div class="why-title">DOŚWIADCZENIE</div>
-        <div class="why-desc">Lata praktyki i setki wykonanych zabiegów. Wiedza oparta na realnych przypadkach.</div>
-      </div>
-      <div class="why-item reveal d1">
-        <svg class="why-ico" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 4l2.5 8.5H31l-7 5.5 2.5 8.5-7-5-7 5 2.5-8.5-7-5.5h8.5z"/></svg>
-        <div class="why-title">CERTYFIKATY</div>
-        <div class="why-desc">Kursy certyfikowane, honorowane przez polskie i europejskie stowarzyszenia PMU.</div>
-      </div>
-      <div class="why-item reveal d2">
-        <svg class="why-ico" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="14" cy="15" r="5"/><circle cx="26" cy="15" r="5"/><path d="M4 34c0-6 4.5-10 10-10M26 24c5.5 0 10 4 10 10"/></svg>
-        <div class="why-title">MAŁE GRUPY</div>
-        <div class="why-desc">Max 2–3 osoby. Każda kursantka otrzymuje pełną uwagę i indywidualny feedback.</div>
-      </div>
-      <div class="why-item reveal d3">
-        <svg class="why-ico" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 6v28M6 20h28" stroke-linecap="round"/><circle cx="20" cy="20" r="14"/></svg>
-        <div class="why-title">WSPARCIE PO</div>
-        <div class="why-desc">Dostępność i pomoc merytoryczna przez wiele miesięcy po zakończeniu szkolenia.</div>
-      </div>
-    </div>
 
   </div>
 </section>
 
-<!-- ======================== SERVICES CIRCLES ======================== -->
-<section class="services" id="uslugi">
+
+<!-- ======================== RZĘSY ======================== -->
+<section class="lashes" id="rzesy">
   <div class="container">
-    <div class="services-header reveal">
-      <div class="services-title-big">USŁUGI</div>
-      <div class="services-sub">Makijaż permanentny na każdą okazję</div>
+
+    <div class="lashes-header reveal">
+      <span class="label">Stylizacja oczu</span>
+      <div class="lashes-big">RZĘSY<br>&amp; <em>BRWI</em></div>
     </div>
 
-    <div class="service-circles">
-      <div class="svc-item reveal tilt-card">
-        <div class="svc-circle">
-          <img src="IMG_4864.PNG" alt="Makijaż permanentny brwi" style="width:100%;height:100%;object-fit:cover">
-        </div>
-        <div class="svc-name">BRWI</div>
-        <div class="svc-price">od [cena] zł</div>
+    <div class="lashes-grid">
+      <div class="lash-card reveal">
+        <div class="lash-card-title">PRZEDŁUŻANIE RZĘS</div>
+        <ul class="lash-list">
+          <li>Metodą 1:1</li>
+          <li>Metoda 2-3D</li>
+          <li>Metoda 4-6D</li>
+          <li>Express set — rzęsy w godzinę</li>
+        </ul>
+        <a href="https://booksy.com/pl-pl/127931_studio-lashes_brwi-i-rzesy_22068_bydgoszcz#ba_s=sh_1" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Umów</a>
+        <a href="przedluzaniekk.PNG" target="_blank" rel="noopener noreferrer" class="svc-item" style="margin-top:1.5rem;align-self:flex-start">
+          <div class="svc-circle">
+            <img src="przedluzaniekk.PNG" alt="Przedłużanie rzęs — realizacja">
+          </div>
+        </a>
       </div>
-      <div class="svc-item reveal d1 tilt-card">
-        <div class="svc-circle">
-          <img src="IMG_4869.PNG" alt="Stylizacja rzęs" style="width:100%;height:100%;object-fit:cover">
-        </div>
-        <div class="svc-name">RZĘSY</div>
-        <div class="svc-price">od [cena] zł</div>
+      <div class="lash-card reveal d1">
+        <div class="lash-card-title">LAMINACJA RZĘS</div>
+        <ul class="lash-list">
+          <li>Lifting, laminacja, botox</li>
+          <li>Farbowanie rzęs</li>
+          <li>Trwałość 4–6 tygodni</li>
+          <li>Uniesione i bardziej wyraziste</li>
+        </ul>
+        <a href="https://booksy.com/pl-pl/127931_studio-lashes_brwi-i-rzesy_22068_bydgoszcz#ba_s=sh_1" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Umów</a>
+        <a href="laminacjarzes1.jpg" target="_blank" rel="noopener noreferrer" class="svc-item" style="margin-top:1.5rem;align-self:flex-start">
+          <div class="svc-circle">
+            <img src="laminacjarzes1.jpg" alt="Laminacja rzęs — realizacja">
+          </div>
+        </a>
       </div>
-      <div class="svc-item reveal d3 tilt-card">
-        <div class="svc-circle">
-          <img src="IMG_6448.PNG" alt="Laminacja rzęs" style="width:100%;height:100%;object-fit:cover">
-        </div>
-        <div class="svc-name">LAMINACJA</div>
-        <div class="svc-price">od [cena] zł</div>
+      <div class="lash-card reveal d2">
+        <div class="lash-card-title">LAMINACJA BRWI</div>
+        <ul class="lash-list">
+          <li>Laminacja, botox, farbowanie</li>
+        </ul>
+        <p class="lash-card-desc" style="font-size:.82rem;color:var(--white-50);line-height:1.65;margin-top:.75rem">
+          Laminacja brwi to zabieg polegający na uniesieniu i nadaniu kształtu brwiom. Włoski po laminacji są bardziej elastyczne oraz podatne na układanie.
+        </p>
+        <a href="https://booksy.com/pl-pl/127931_studio-lashes_brwi-i-rzesy_22068_bydgoszcz#ba_s=sh_1" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Umów</a>
+        <a href="brwikk.jpg" target="_blank" rel="noopener noreferrer" class="svc-item" style="margin-top:1.5rem;align-self:flex-start">
+          <div class="svc-circle">
+            <img src="brwikk.jpg" alt="Laminacja brwi — realizacja">
+          </div>
+        </a>
+      </div>
+      <div class="lash-card reveal d3">
+        <div class="lash-card-title">HENNA PUDROWA LUB FARBKA</div>
+        <a href="https://booksy.com/pl-pl/127931_studio-lashes_brwi-i-rzesy_22068_bydgoszcz#ba_s=sh_1" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Umów</a>
+        <a href="brwihenna.jpg" target="_blank" rel="noopener noreferrer" class="svc-item" style="margin-top:1.5rem;align-self:flex-start">
+          <div class="svc-circle">
+            <img src="brwihenna.jpg" alt="Henna pudrowa — realizacja">
+          </div>
+        </a>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -1110,7 +1188,7 @@ a{color:inherit;text-decoration:none}
   <div class="container">
 
     <div class="pmu-header reveal">
-      <div class="pmu-big">MAKIJAŻ<br><em>PMU</em></div>
+      <div class="pmu-big"><em>PMU</em></div>
       <div>
         <span class="label">Specjalizacja</span>
         <p class="pmu-body">
@@ -1124,52 +1202,15 @@ a{color:inherit;text-decoration:none}
       <div class="pmu-card reveal tilt-card">
         <div class="pmu-card-num">01</div>
         <div class="pmu-card-title">Brwi</div>
-        <p class="pmu-card-desc">Ombre, microblading, kombinacja — idealnie wymodelowane brwi dopasowane do rysów Twojej twarzy.</p>
-        <div class="pmu-card-meta">⏱ 2–3 godz.&ensp;·&ensp;Efekt do 2 lat</div>
-        <div class="pmu-card-price">[cena do uzupełnienia]</div>
-        <a href="tel:504998984" class="btn btn-outline btn-sm">Umów wizytę</a>
-      </div>
-      <div class="pmu-card reveal d1 tilt-card">
-        <div class="pmu-card-num">02</div>
-        <div class="pmu-card-title">Korekta PMU</div>
-        <p class="pmu-card-desc">Korekcja i pokrycie nieudanych zabiegów. Przywrócimy piękno Twojemu makijażowi.</p>
-        <div class="pmu-card-meta">⏱ Wycena indywidualna</div>
-        <div class="pmu-card-price">[cena do uzupełnienia]</div>
-        <a href="tel:504998984" class="btn btn-outline btn-sm">Konsultacja</a>
-      </div>
-    </div>
+        <p class="pmu-card-desc">Ombre — idealnie wymodelowane brwi dopasowane do rysów Twojej twarzy.</p>
 
-    <!-- Process -->
-    <div class="reveal" style="margin-bottom:clamp(3rem,6vw,5rem)">
-      <span class="label">Jak wygląda zabieg</span>
-      <div class="pmu-process">
-        <div class="pmu-step">
-          <div class="step-num">01</div>
-          <div class="step-name">Konsultacja</div>
-          <p class="step-desc">Omawiamy oczekiwania, dobieramy kolor i kształt, wykonujemy próbę rysunku. Czas wyłącznie dla Ciebie.</p>
-        </div>
-        <div class="pmu-step">
-          <div class="step-num">02</div>
-          <div class="step-name">Zabieg</div>
-          <p class="step-desc">Precyzyjne wykonanie na sterylnym, jednorazowym sprzęcie. Komfort i bezpieczeństwo na pierwszym miejscu.</p>
-        </div>
-        <div class="pmu-step">
-          <div class="step-num">03</div>
-          <div class="step-name">Gojenie</div>
-          <p class="step-desc">Instrukcje pielęgnacji i pełna dostępność przez cały czas gojenia. Poprawka po 4–6 tygodniach wliczona w cenę.</p>
-        </div>
+        <a href="https://booksy.com/pl-pl/127931_studio-lashes_brwi-i-rzesy_22068_bydgoszcz#ba_s=sh_1" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">Umów wizytę</a>
+        <a href="makijazpmu.jpg" target="_blank" rel="noopener noreferrer" class="svc-item" style="margin-top:1.5rem;align-self:flex-start">
+          <div class="svc-circle">
+            <img src="makijazpmu.jpg" alt="Makijaż permanentny brwi — realizacja">
+          </div>
+        </a>
       </div>
-    </div>
-
-    <!-- PMU Gallery -->
-    <span class="label reveal">Galeria realizacji</span>
-    <div class="pmu-gallery reveal">
-      <div class="photo-box"><img src="IMG_4864.PNG" alt="Realizacja PMU — brwi"></div>
-      <div class="photo-box"><img src="IMG_4868.PNG" alt="Realizacja PMU — brwi"></div>
-      <div class="photo-box"><img src="IMG_6448.PNG" alt="Realizacja PMU"></div>
-      <div class="photo-box"><img src="IMG_4590.png" alt="Realizacja PMU"></div>
-      <div class="photo-box"><img src="IMG_4869.PNG" alt="Realizacja PMU — rzęsy"></div>
-      <div class="photo-box"><img src="IMG_4868.PNG" alt="Realizacja PMU — brwi"></div>
     </div>
 
   </div>
@@ -1223,63 +1264,24 @@ a{color:inherit;text-decoration:none}
   </div>
 
   <div class="marquee-cta">
-    <a href="tel:504998984" class="btn btn-gold" style="font-size:.8rem;padding:1rem 2.5rem">
+    <a href="https://booksy.com/pl-pl/127931_studio-lashes_brwi-i-rzesy_22068_bydgoszcz#ba_s=sh_1" target="_blank" rel="noopener noreferrer" class="btn btn-gold" style="font-size:.8rem;padding:1rem 2.5rem">
       Przejdź do rezerwacji &ensp;→
     </a>
   </div>
 </div>
 
-<!-- ======================== RZĘSY ======================== -->
-<section class="lashes" id="rzesy">
+<!-- ======================== GALERIA REALIZACJI ======================== -->
+<section class="pmu" style="padding:clamp(4rem,8vw,7rem) 0">
   <div class="container">
-
-    <div class="lashes-header reveal">
-      <span class="label">Stylizacja oczu</span>
-      <div class="lashes-big">RZĘSY<br>&amp; <em>BRWI</em></div>
+    <span class="label reveal">Galeria realizacji</span>
+    <div class="pmu-gallery reveal">
+      <div class="photo-box"><img src="IMG_4864.PNG" alt="Realizacja — brwi"></div>
+      <div class="photo-box"><img src="IMG_4868.PNG" alt="Realizacja — brwi"></div>
+      <div class="photo-box"><img src="laminacjarzeskk.PNG" alt="Realizacja PMU"></div>
+      <div class="photo-box"><img src="IMG_4590.png" alt="Realizacja PMU"></div>
+      <div class="photo-box"><img src="IMG_4869.PNG" alt="Realizacja — rzęsy"></div>
+      <div class="photo-box"><img src="IMG_4868.PNG" alt="Realizacja — brwi"></div>
     </div>
-
-    <div class="lashes-grid">
-      <div class="lash-card reveal">
-        <div class="lash-card-title">PRZEDŁUŻANIE</div>
-        <ul class="lash-list">
-          <li>Klasyczne 1:1</li>
-          <li>Objętościowe 2D–6D</li>
-          <li>Mega Volume 10D+</li>
-          <li>Wiązki (hybrid)</li>
-        </ul>
-        <div class="lash-card-price">[cena do uzupełnienia]</div>
-        <a href="tel:504998984" class="btn btn-outline btn-sm">Umów</a>
-      </div>
-      <div class="lash-card reveal d1">
-        <div class="lash-card-title">LAMINACJA</div>
-        <ul class="lash-list">
-          <li>Laminacja + keratyna</li>
-          <li>Uniesione i długie rzęsy</li>
-          <li>Trwałość 6–8 tygodni</li>
-          <li>Opcja tinting (farbowanie)</li>
-        </ul>
-        <div class="lash-card-price">[cena do uzupełnienia]</div>
-        <a href="tel:504998984" class="btn btn-outline btn-sm">Umów</a>
-      </div>
-      <div class="lash-card reveal d2">
-        <div class="lash-card-title">LIFTING</div>
-        <ul class="lash-list">
-          <li>Lifting + botox do rzęs</li>
-          <li>Naturalne uniesienie</li>
-          <li>Trwałość 8–12 tygodni</li>
-          <li>Idealne dla krótkich rzęs</li>
-        </ul>
-        <div class="lash-card-price">[cena do uzupełnienia]</div>
-        <a href="tel:504998984" class="btn btn-outline btn-sm">Umów</a>
-      </div>
-    </div>
-
-    <div class="lashes-gallery reveal">
-      <div class="photo-box" style="aspect-ratio:4/5"><img src="IMG_4864.PNG" alt="Rzęsy — realizacja"></div>
-      <div class="photo-box" style="aspect-ratio:4/5"><img src="IMG_4869.PNG" alt="Rzęsy — realizacja"></div>
-      <div class="photo-box" style="aspect-ratio:4/5"><img src="IMG_4868.PNG" alt="Rzęsy — realizacja"></div>
-    </div>
-
   </div>
 </section>
 
@@ -1294,15 +1296,12 @@ a{color:inherit;text-decoration:none}
           <img src="IMG_2424.PNG" alt="Katarzyna Knieć" style="width:100%;height:100%;object-fit:cover;object-position:top">
           <div class="about-portrait-tag">KATARZYNA KNIEĆ</div>
         </div>
-        <div class="cursive-tag">Twoja Artystka PMU</div>
       </div>
 
       <!-- Text column -->
       <div class="about-text-block">
         <div class="reveal">
-          <span class="label">O mnie</span>
           <div class="about-big">O MNIE</div>
-          <div class="about-tagline">artystka makijażu permanentnego</div>
         </div>
 
         <div class="gold-line-sm" style="margin-top:1.5rem"></div>
@@ -1321,17 +1320,28 @@ a{color:inherit;text-decoration:none}
 
         <div class="about-stats reveal d3">
           <div>
-            <div class="stat-n" data-target="8">[X]+</div>
+            <div class="stat-n" data-target="16">16+</div>
             <div class="stat-l">Lat<br>doświadczenia</div>
           </div>
           <div>
-            <div class="stat-n" data-target="500">[X]+</div>
+            <div class="stat-n" data-target="1000">1000+</div>
             <div class="stat-l">Zadowolonych<br>klientek</div>
           </div>
           <div>
-            <div class="stat-n" data-target="120">[X]+</div>
-            <div class="stat-l">Przeszkolonych<br>artystek</div>
+            <div class="stat-n" data-target="120">120+</div>
+            <div class="stat-l">Przeszkolonych<br>kursantek</div>
           </div>
+        </div>
+
+        <div class="about-social reveal d4">
+          <a href="https://www.instagram.com/katarzyna_kniec_lashes_pmu/" target="_blank" rel="noopener noreferrer" class="about-social-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            Instagram
+          </a>
+          <a href="https://www.facebook.com/KasKalash" target="_blank" rel="noopener noreferrer" class="about-social-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            Facebook
+          </a>
         </div>
       </div>
     </div>
@@ -1345,7 +1355,6 @@ a{color:inherit;text-decoration:none}
   <p class="cta-band-sub reveal d1">Napisz lub zadzwoń — chętnie odpowiem i pomogę wybrać odpowiedni kurs.</p>
   <div class="cta-band-btns reveal d2">
     <a href="tel:504998984" class="btn btn-gold">Zadzwoń: 504 998 984</a>
-    <a href="https://wa.me/48504998984" target="_blank" class="btn btn-outline">WhatsApp</a>
   </div>
 </div>
 
@@ -1353,7 +1362,7 @@ a{color:inherit;text-decoration:none}
 <section class="contact" id="kontakt">
   <div class="container">
 
-    <div class="contact-big reveal">KONTAK<em>T</em></div>
+    <div class="contact-big reveal">KONTAKT</div>
 
     <div class="contact-grid">
       <div class="reveal">
@@ -1371,16 +1380,8 @@ a{color:inherit;text-decoration:none}
             <div class="cinfo-val"><a href="tel:504998984">504 998 984</a></div>
           </div>
         </div>
-        <div class="cinfo-item">
-          <svg class="cinfo-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          <div>
-            <div class="cinfo-label">Godziny pracy</div>
-            <div class="cinfo-val" style="font-size:1rem">[do uzupełnienia]</div>
-          </div>
-        </div>
         <div class="cbtns">
           <a href="tel:504998984" class="btn btn-gold">Zadzwoń</a>
-          <a href="https://wa.me/48504998984" target="_blank" class="btn btn-outline">WhatsApp</a>
         </div>
       </div>
 
@@ -1390,7 +1391,7 @@ a{color:inherit;text-decoration:none}
           <div class="map-gold-corner br"></div>
           <iframe
             loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2400.0!2d18.0076!3d53.1235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zUG96bsOhxYRza2EgMjQsIEJ5ZGdvc3pjeQ!5e0!3m2!1spl!2spl!4v1700000000000"
+            src="https://www.google.com/maps?q=Pozna%C5%84ska+24%2C+85-129+Bydgoszcz&output=embed"
             title="Katarzyna Knieć Bydgoszcz">
           </iframe>
         </div>
@@ -1406,13 +1407,14 @@ a{color:inherit;text-decoration:none}
   <div class="gold-line" style="max-width:380px;margin:0 auto 2rem"></div>
   <div class="footer-links">
     <a href="#szkolenia">Szkolenia</a>
-    <a href="#pmu">Makijaż PMU</a>
     <a href="#rzesy">Rzęsy</a>
+    <a href="#pmu">Makijaż PMU</a>
     <a href="#o-mnie">O mnie</a>
-    <a href="https://instagram.com/" target="_blank">Instagram @[placeholder]</a>
+    <a href="https://www.instagram.com/katarzyna_kniec_lashes_pmu/" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="https://www.facebook.com/KasKalash" target="_blank" rel="noopener noreferrer">Facebook</a>
     <a href="tel:504998984">504 998 984</a>
   </div>
-  <div class="footer-copy">© 2025 Katarzyna Knieć · Poznańska 24, 85-129 Bydgoszcz</div>
+  <div class="footer-copy">© 2026 Katarzyna Knieć · Poznańska 24, 85-129 Bydgoszcz</div>
 </footer>
 
 <!-- ======================== JS ======================== -->
@@ -1422,6 +1424,22 @@ a{color:inherit;text-decoration:none}
   window.addEventListener('scroll', () => {
     nav.classList.toggle('stuck', window.scrollY > 60);
   }, {passive: true});
+
+  // ── Hamburger menu ──
+  const hamburger = document.getElementById('hamburger');
+  const navMenu = document.querySelector('.nav-menu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navMenu.classList.toggle('open');
+    document.body.style.overflow = navMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
 
   // ── Scroll reveal ──
   const io = new IntersectionObserver((entries) => {
